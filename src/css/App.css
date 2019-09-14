@@ -1,0 +1,28 @@
+.navbar{
+  justify-items: end;
+}
+
+.dropdown-toggle {
+  background-color:rgb(28, 33, 105);
+  display:inline-block;
+}
+
+.dropdown-toggle:hover {
+  background-color:rgb(38, 44, 110)
+  /* display:inline-block; */
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-secondary.dropdown-toggle {
+  color: #fff;
+  /* background-color: #545b62; */
+  border-color: #4e555b;
+  background-color:#2b2ec5;
+  /* display:inline-block; */
+}
+
+
+
+.col-md-2{
+  background-color: #2b2ec5;
+}

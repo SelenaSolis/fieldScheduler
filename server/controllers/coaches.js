@@ -1,7 +1,9 @@
-let Coach = require("../models/coaches")
+let Coach = require("../models/coachModel")
 
 exports.list = function(req, res){
-
+    Coach.find((err,c) =>{
+        return res.json(c)
+    })
 }
 
 
@@ -12,12 +14,15 @@ exports.show = function (req, res) {
 }
 
 exports.create = function (req, res){
-    let user = new User({
-        name: req.body.name,
-        cart: []
+    let coach = new Coach({
+        fName: req.body.fName,
+        lName: req.body.lName,
+        teams: [],
+        unavailableTimes:{},
+        schedule:{}
     })
-    user.save().then(savedUser =>{
-        console.log(savedUser)
+    coach.save().then(savedCoach =>{
+        console.log(savedCoach)
     })
 }
 
