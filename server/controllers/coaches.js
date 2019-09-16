@@ -15,8 +15,8 @@ exports.show = function (req, res) {
 
 exports.create = function (req, res){
     let coach = new Coach({
-        fName: req.body.fName,
-        lName: req.body.lName,
+        fName: req.body.fName.trim(),
+        lName: req.body.lName.trim(),
         teams: [],
         unavailableTimes:{},
         schedule:{}

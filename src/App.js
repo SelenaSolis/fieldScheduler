@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import TopNav from "./components/TopNav";
 import ListCoaches from "./components/ListCoaches";
-import EnterCoach from "./components/EnterCoach"
+import EnterCoach from "./components/EnterCoach";
 import "./css/App.css";
+
 
 class App extends Component{
 
   state = {
-    newCoach: "",
     coaches: []
   }
 
@@ -17,14 +17,9 @@ class App extends Component{
     .then(data => this.setState({coaches: data}))
   }
 
-  handleSubmit = (obj) =>{
-    fetch('/coaches', {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(obj)
-    })
-  }
+  viewMore = (e, id) =>{
 
+  }
 
   render(){
     return (
@@ -34,14 +29,13 @@ class App extends Component{
             <TopNav/>
           </div>
           <div className = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <EnterCoach
-              handleSubmit = {this.handleSubmit}
-            />
+            <EnterCoach/>
           </div>
 
           <div className = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <ListCoaches
               coaches = {this.state.coaches}
+              viewMore = {this.viewMore}
             />
           </div>
         </div>

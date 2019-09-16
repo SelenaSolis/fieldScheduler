@@ -1,12 +1,16 @@
 require("dotenv").config();
-const express = require('express')
-const app = express()
-app.use(express.static("public"));
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+const express = require('express');
 let mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+let coachRoutes = require('./server/routes/coachRoutes');
+
+const app = express()
+
+app.use(bodyParser.json());
+app.use(express.static("public"));
+
 mongoose.connect(process.env.mongodburi, {useNewUrlParser: true})
-let coachRoutes = require('./server/routes/coachRoutes')
+
 
 app.use('/coaches', coachRoutes)
 

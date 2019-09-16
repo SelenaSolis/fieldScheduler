@@ -1,16 +1,17 @@
 import React from 'react';
 
 function ListCoaches(props){
-
-    let coachList = props.coaches.map(c =>
-            <h2>{c.fName} {c.lName}</h2>
-        )
     return(
         <div>
-            <button onClick = {props.fetchCoaches}>View Coaches</button>
-            {coachList}
+            <button>View Coaches</button>
+            {props.coaches.map(c =>
+                <div>
+                    <h5>{c.fName} {c.lName}</h5> 
+                    <button>View</button>
+                </div>
+            )}
         </div>
-    )
+    )  
 }
 
-export default ListCoaches
+export default ListCoaches;
