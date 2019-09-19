@@ -3,13 +3,10 @@ import React from 'react';
 function ListCoaches(props){
     return(
         <div>
-            <button>View Coaches</button>
-            {props.coaches.map(c =>
                 <div>
-                    <h5>{c.fName} {c.lName}</h5> 
-                    <button>View</button>
+                    <h5>{props.fName} {props.lName}</h5> 
+                    <button onClick = {()=>{props.viewMore(props.id)}}>View</button>
                 </div>
-            )}
         </div>
     )  
 }

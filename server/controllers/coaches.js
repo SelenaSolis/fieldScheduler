@@ -22,7 +22,7 @@ exports.create = function (req, res){
         schedule:{}
     })
     coach.save().then(savedCoach =>{
-        console.log(savedCoach)
+        res.json(savedCoach);
     })
 }
 
