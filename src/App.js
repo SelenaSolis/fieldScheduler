@@ -3,6 +3,8 @@ import TopNav from "./components/TopNav";
 import ListCoaches from "./components/ListCoaches";
 import EnterCoach from "./components/EnterCoach";
 import ViewCoach from "./components/ViewCoach"
+import ListTeams from "./components/ListTeams"
+import EnterTeam from "./components/EnterTeam"
 import "./css/App.css";
 
 
@@ -11,18 +13,22 @@ class App extends Component{
   state = {
     coaches: [],
     view: "homepage",
-    viewCoach: {}
+    viewCoach: {},
+    teams:[]
   }
 
   componentDidMount(){
     fetch('/coaches')
     .then(res => res.json())
     .then(data => this.setState({coaches: data}))
+    fetch('/teams')
+    .then(res => res.json())
+    .then(data => this.setState({teams: data}))
   }
 
   viewMore = (id) =>{
     this.setState({view: "viewcoach"});
-    let coach = this.state.coaches.find(c => c._id == id);
+    let coach = this.state.coaches.find(c => c._id === id);
     this.setState({viewCoach: coach});
     console.log("why is this happening?")
   }
@@ -39,13 +45,11 @@ class App extends Component{
             <div className = "col-xs-12 col-sm-4 col-md-2 col-lg-12">
               <TopNav/>
             </div>
-            <div className = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div className = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
               <EnterCoach/>
               <button>View Coaches</button>
-            </div>
 
-            <div className = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            {this.state.coaches.map((c) =>
+              {this.state.coaches.map((c) =>
               <ListCoaches
                 key = {c._id}
                 fName = {c.fName}
@@ -54,6 +58,18 @@ class App extends Component{
                 viewMore = {this.viewMore}
               />
             )}
+            </div>
+
+            {/* <div className = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            
+            </div> */}
+            <div className = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <EnterTeam/>
+              {this.state.teams.map((t) => 
+                <ListTeams
+                  name = {t.name}
+                />
+                )}
             </div>
           </div>
         </div>

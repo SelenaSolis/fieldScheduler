@@ -5,7 +5,7 @@ function ListCoaches(props){
         <div>
                 <div>
                     <h5>{props.coach.fName} {props.coach.lName}</h5> 
-                    <button>View</button>
+                    <h5>Teams</h5>
                 </div>
                 <button onClick = {() => {props.changeView()}}>back</button>
         </div>

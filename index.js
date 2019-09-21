@@ -3,6 +3,7 @@ const express = require('express');
 let mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 let coachRoutes = require('./server/routes/coachRoutes');
+let teamRoutes = require('./server/routes/teamRoutes')
 
 const app = express()
 
@@ -13,7 +14,7 @@ mongoose.connect(process.env.mongodburi, {useNewUrlParser: true})
 
 
 app.use('/coaches', coachRoutes)
-
+app.use('/teams', teamRoutes)
 
 
 const thePort = 3001
