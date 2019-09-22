@@ -5,6 +5,7 @@ function ListCoaches(props){
         <div>
                 <div>
                     <h5>{props.fName} {props.lName}</h5> 
+                    <button onClick = {()=>{props.viewMore(props.id)}}>View</button>
                 </div>
         </div>
     )  

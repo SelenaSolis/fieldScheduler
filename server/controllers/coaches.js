@@ -27,8 +27,8 @@ exports.create = function (req, res){
 }
 
 exports.update = function (req,res){
-    // User.findByIdAndUpdate(req.body._id, req.body, (err, user)=>{
-    //     console.log(req.body._id)
-    //     return res.json(user);
-    // })
+    Coach.findByIdAndUpdate(req.body._id, req.body, (err, coach)=>{
+        console.log(req.body._id)
+        return res.json(coach);
+    })
 }

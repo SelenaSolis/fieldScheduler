@@ -25,9 +25,9 @@ exports.create = function (req, res){
     })
 }
 
-// exports.update = function (req,res){
-//     // User.findByIdAndUpdate(req.body._id, req.body, (err, user)=>{
-//     //     console.log(req.body._id)
-//     //     return res.json(user);
-//     // })
-// }
+exports.update = function (req,res){
+    Team.findByIdAndUpdate(req.body._id, req.body, (err, team)=>{
+        console.log(req.body._id)
+        return res.json(team);
+    })
+}

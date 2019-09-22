@@ -30,7 +30,6 @@ class App extends Component{
     this.setState({view: "viewcoach"});
     let coach = this.state.coaches.find(c => c._id === id);
     this.setState({viewCoach: coach});
-    console.log("why is this happening?")
   }
 
   changeView = () =>{
