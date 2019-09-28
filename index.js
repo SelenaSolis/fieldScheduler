@@ -4,6 +4,7 @@ let mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 let coachRoutes = require('./server/routes/coachRoutes');
 let teamRoutes = require('./server/routes/teamRoutes')
+let fieldRoutes = require('./server/routes/fieldRoutes')
 
 const app = express()
 
@@ -15,6 +16,7 @@ mongoose.connect(process.env.mongodburi, {useNewUrlParser: true})
 
 app.use('/coaches', coachRoutes)
 app.use('/teams', teamRoutes)
+app.use('/fields', fieldRoutes)
 
 
 const thePort = 3001

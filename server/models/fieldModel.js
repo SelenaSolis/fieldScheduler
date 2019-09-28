@@ -1,16 +1,16 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
+const fieldSchema = new Schema ({
+    name: String,
+    field: String,
+    units: Number,
+    lat: Number,
+    lon: Number,
+    availableTimes: {type: Schema.Types.Mixed, default: {} },
+    schedule: {type: Schema.Types.Mixed, default: {} }
+}, { minimize: false })
 
+let Field = mongoose.model('Field', fieldSchema);
 
-// const fieldSchema = new Schema ({
-//     name: String,
-//     lat: String,
-//     lon: String,
-//     availableTimes: [],
-//     spots: Number
-// })
-
-// let Field = mongoose.model('Field', fieldSchema);
-
-// module.exports = Field;
+module.exports = Field;
