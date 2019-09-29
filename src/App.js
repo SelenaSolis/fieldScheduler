@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import TopNav from "./components/TopNav";
 import ListCoaches from "./components/ListCoaches";
-import EnterCoach from "./components/EnterCoach";
-import ViewCoach from "./components/ViewCoach"
 import ListTeams from "./components/ListTeams"
-import EnterTeam from "./components/EnterTeam"
-import GoogleApiWrapper from "./map";
+import MapContainer from './components/GoogleMap'
 import "./css/App.css";
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 
 /* global google */
@@ -15,7 +14,6 @@ class App extends Component{
 
   state = {
     coaches: [],
-    view: "homepage",
     viewCoach: {},
     teams:[],
     fields:[]
@@ -25,9 +23,7 @@ class App extends Component{
     fetch('/coaches')
     .then(res => res.json())
     .then(data => this.setState({coaches: data}))
-    fetch('/teams')
-    .then(res => res.json())
-    .then(data => this.setState({teams: data}))
+
     fetch('/fields')
     .then(res => res.json())
     .then(data => {
@@ -76,60 +72,22 @@ class App extends Component{
   }
 
   render(){
-    if(this.state.view === "homepage"){
-      return (
+    return (
+      <Router basename = {'/'}>
         <div className = "container-fluid">
           <div className = "row">
-            <div className = "col-xs-12 col-sm-4 col-md-2 col-lg-12">
               <TopNav/>
-            </div>
-            <div className = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <EnterCoach/>
-              <button>View Coaches</button>
-
-              {this.state.coaches.map((c) =>
-              <ListCoaches
-                key = {c._id}
-                fName = {c.fName}
-                lName = {c.lName}
-                id = {c._id}
-                viewMore = {this.viewMore}
-              />
-            )}
-            </div>
-            <div id = "map">
-              {/* <iframe width="600" height="450" frameborder="0" style={{border:0}} src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJLwPMoJm1RIYRetVp1EtGm10&key=AIzaSyBsybA2i2zLi1_rzH4wN4TJIiZ3AmIW__Y" allowfullscreen></iframe> */}
-              <GoogleApiWrapper
-                fields = {this.state.fields}
-              />
-            </div>
-
-            {/* <div className = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            
-            </div> */}
-            <div className = "col-xs-12 col-sm-12 col-md-6 col-lg-6">
-              <EnterTeam/>
-              {this.state.teams.map((t) => 
-                <ListTeams
-                  name = {t.name}
-                />
-                )}
+          </div>
+          <div className = "row">
+            <div className = " col col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <Route exact path='/coaches' component={ListCoaches}/>
+            <Route exact path='/teams' component={ListTeams}/>
+            <Route exact path='/fields' component={MapContainer}/>
             </div>
           </div>
         </div>
-      )
-    }
-    else if(this.state.view === "viewcoach" && this.state.viewCoach){
-      return(
-        <ViewCoach
-          coach = {this.state.viewCoach}
-          changeView = {this.changeView}
-        />
-      )
-    }
-    else{
-      return "loading"
-    }
+      </Router>
+    ) 
   }
 }
 export default App;

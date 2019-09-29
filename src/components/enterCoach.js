@@ -26,14 +26,16 @@ class EnterCoaches extends Component{
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         First Name:
+                    </label>
                         <input type="text" onChange={(e)=>{
                             this.setState({coach: {...this.state.coach, fName: e.target.value}})
                         }} />
+                    <label>
                         Last Name:
+                    </label>
                         <input type="text" onChange={(e)=>{
                             this.setState({coach: {...this.state.coach, lName: e.target.value}})
                         }} />
-                    </label>
                     <input type="submit" value="Submit" />
                 </form>
             </div>

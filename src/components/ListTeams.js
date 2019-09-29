@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Team from "./Team"
 
-function ListTeams(props){
-    return(
-        <div>
-                <div className = "d-inline">
-                    <h5 className = "d-inline">{props.name}</h5>
-                    <a href="#" className = "d-inline">
-                        <span className="glyphicon glyphicon-pencil"></span>
-                    </a> 
-                    {/* <button onClick = {()=>{props.viewMore(props.id)}}>View</button> */}
-                </div>
-        </div>
-    )  
+class ListTeams extends Component {
+  state = {
+    teams: []
+  }
+
+  componentDidMount() {
+    fetch('/teams')
+      .then(res => res.json())
+      .then(data => this.setState({ teams: data }))
+  }
+
+  render() {
+    let teamList = this.state.teams.map((t, index) =>
+      <Team
+        key={index}
+        name={t.name}
+      />  
+    )
+    return (
+      <div className = "d-flex flex-row">
+        {teamList}
+      </div>
+    )
+  }
 }
 
 export default ListTeams;
