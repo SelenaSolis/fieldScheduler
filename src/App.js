@@ -94,21 +94,28 @@ class App extends Component{
         body: JSON.stringify(t)
       })
     })
-
-
   }
 
+
+
+
   render(){
+    // let coachOptions = [];
+    // this.state.coaches.map(c=>{
+    //   coachOptions.push(<option value = {`${c.fName} ${c.lName}`}>{c.fName} {c.lName}</option>); 
+    // })
+
+
     return (
       <Router basename = {'/'}>
         <div className = "container-fluid">
           <div className = "row">
               <TopNav/>
           </div>
-          <div className = "row">
-            <div className = " col col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div className = "row d-flex">
+            <div className = "col col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <Route exact path='/coaches' component={ListCoaches}/>
-            <Route exact path='/teams' component={ListTeams}/>
+            <Route path='/teams' render={props => <ListTeams {...props} coaches = {this.state.coaches}/>}/>
             <Route exact path='/fields' component={MapContainer}/>
             </div>
           </div>

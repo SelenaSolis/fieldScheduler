@@ -32,7 +32,7 @@ export class MapContainer extends Component {
     })
   }
   render(){
-    if(this.state.fields.length != 0){
+    if(this.state.fields.length !== 0){
       return (
         <div>
           <div id = "map">

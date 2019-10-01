@@ -7,11 +7,11 @@ exports.list = function(req, res){
 }
 
 
-// exports.show = function (req, res) {
-//     // User.find({name: 'Selena'}, (err,u)=>{
-//     //     return res.json(u[0]);
-//     // });
-// }
+exports.show = function show(req, res) {
+    Team.findById(req.params.id, (err,t)=>{
+        return res.json(t);
+    });
+ }
 
 exports.create = function (req, res){
     let team = new Team({
