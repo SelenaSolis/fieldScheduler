@@ -5,15 +5,37 @@ function Team (props){
 
   function assignCoach() {
     let newCoach = document.getElementById(props.id).value
+    let newCoachObj = props.coaches.find(c=>`${c.fName} ${c.lName}` === newCoach)
     let team = props.team
     console.log(team)
     team.coach = newCoach;
-      fetch("/teams", {
-        method: "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(team)
-      })
+    team.coachId = newCoachObj._id
+    fetch("/teams", {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(team)
+    })
+    let coachObj = Object.assign({}, newCoachObj)
+    fetch("/coaches", {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(coachObj)
+    })
   }
+
+      
+      // .then(()=>{
+        // CoachObj = Object.assign({}, newCoachObj)
+        // let teams = coachObj.teams;
+        // let foundTeam = teams.find(t=>t.name === team.name);
+        // if(foundTeam === -1){
+        //   teams.push(team.name)
+        // }
+        // else{
+
+        // }
+      // })
+    
 
   return(
     <div className="card" id="card" style={{width: "18rem"}}>

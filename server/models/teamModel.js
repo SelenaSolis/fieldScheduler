@@ -6,7 +6,8 @@ const teamSchema = new Schema ({
     topTeam: String,
     coach: String,
     practiceSch: [],
-    size: String
+    size: String,
+    coachId: String
 })
 
 let Team = mongoose.model('Team', teamSchema);

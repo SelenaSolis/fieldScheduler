@@ -88,6 +88,7 @@ class App extends Component{
     let teams = [...this.state.teams]
     teams.map(t=>{
       t.coach = "";
+      t.coachId = "";
       fetch("/teams", {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
