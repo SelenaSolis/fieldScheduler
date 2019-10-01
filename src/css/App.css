@@ -1,5 +1,6 @@
 .navbar{
   justify-items: end;
+  
 }
 
 .dropdown-toggle {
@@ -21,8 +22,6 @@
   /* display:inline-block; */
 }
 
-
-
-.col-md-2{
+#navDiv{
   background-color: #2b2ec5;
 }

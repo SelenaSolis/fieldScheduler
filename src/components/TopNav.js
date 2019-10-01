@@ -4,8 +4,8 @@ import { Link} from "react-router-dom";
 
 function TopNav(){
   return(
-    <div className = "col col-xs-12 col-sm-4 col-md-12 col-lg-12">
-      <nav className = "navbar" style={{"background-color":"blue"}}>
+    <div className = "col col-xs-12 col-sm-4 col-md-12 col-lg-12" id="navDiv">
+      <nav className = "navbar">
           <Link to="/">
             <div>USER</div>
           </Link>

@@ -24,6 +24,10 @@ class App extends Component{
     .then(res => res.json())
     .then(data => this.setState({coaches: data}))
 
+    fetch('/teams')
+    .then(res => res.json())
+    .then(data => this.setState({teams: data}))
+
     fetch('/fields')
     .then(res => res.json())
     .then(data => {
@@ -71,6 +75,29 @@ class App extends Component{
     this.setState({view: "homepage"})
   }
 
+  clear(){
+    let coaches = [...this.state.coaches]
+    coaches.map(c=>{
+      c.teams = [];
+      fetch("/coaches", {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(c)
+      })
+    })
+    let teams = [...this.state.teams]
+    teams.map(t=>{
+      t.coach = "";
+      fetch("/teams", {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(t)
+      })
+    })
+
+
+  }
+
   render(){
     return (
       <Router basename = {'/'}>
@@ -79,12 +106,13 @@ class App extends Component{
               <TopNav/>
           </div>
           <div className = "row">
-            <div className = " col col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div className = " col col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <Route exact path='/coaches' component={ListCoaches}/>
             <Route exact path='/teams' component={ListTeams}/>
             <Route exact path='/fields' component={MapContainer}/>
             </div>
           </div>
+          <button onClick={()=>{this.clear()}}>clear</button>
         </div>
       </Router>
     ) 

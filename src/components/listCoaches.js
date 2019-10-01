@@ -25,7 +25,7 @@ class ListCoaches extends Component{
     )
 
     return(
-      <div className = "d-flex flex-col">
+      <div className>
         {coachList}
       </div>
     )

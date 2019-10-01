@@ -28,7 +28,6 @@ exports.create = function (req, res){
 
 exports.update = function (req,res){
     Coach.findByIdAndUpdate(req.body._id, req.body, (err, coach)=>{
-        console.log(req.body._id)
         return res.json(coach);
     })
 }
