@@ -33,29 +33,30 @@ class App extends Component{
     .then(data => {
       // let fields = [];
       // data.map(f =>{
-      //   let string = '';
-      //   let field = Object.assign({}, f)
-      //   field.name.split(' ').map(word => string += `+${word}`)
-      //   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${string},+Austin,+TX&key=AIzaSyBsybA2i2zLi1_rzH4wN4TJIiZ3AmIW__Y`)
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     field.lat = data.results[0].geometry.location.lat;
-      //     field.lon = data.results[0].geometry.location.lng;
-      //   })
-      //   console.log(field)
-      //   fields.push(field);
+        // let string = '';
+        // let field = Object.assign({}, f)
+        // field.name.split(' ').map(word => string += `+${word}`)
+        // fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${string},+Austin,+TX&key=AIzaSyBsybA2i2zLi1_rzH4wN4TJIiZ3AmIW__Y`)
+        // .then(res => res.json())
+        // .then(data => {
+        //   field.lat = data.results[0].geometry.location.lat;
+        //   field.lon = data.results[0].geometry.location.lng;
+        // })
+        // fields.push(field);
         // fetch("/fields", {
         //   method: "PUT",
         //   headers: {"Content-Type": "application/json"},
         //   body: JSON.stringify(field)
         // }).then(console.log(field))
       // })
-        this.setState({fields: data});
+      this.setState({fields: data})
     })
   }
 
+
   updateField = () => {
     let fields = [...this.state.fields]
+    console.log(fields)
     fields.map(f =>{
       fetch("/fields", {
         method: "PUT",
@@ -105,7 +106,6 @@ class App extends Component{
     // this.state.coaches.map(c=>{
     //   coachOptions.push(<option value = {`${c.fName} ${c.lName}`}>{c.fName} {c.lName}</option>); 
     // })
-
 
     return (
       <Router basename = {'/'}>

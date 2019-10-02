@@ -16,32 +16,28 @@ class ListCoaches extends Component{
     .then(data => this.setState({teams: data}))
   }
 
-  // getTeams(){
-  //   fetch('/coaches')
-  //   .then(res => res.json())
-  //   .then(data => this.setState({coaches: data}))
-  // }
+
 
 
   render(){
     let coachList = this.state.coaches.map((c,index)=>{
+      console.log(c)
       let teams = [];
-      if(this.state.teams){
+      // if(this.state.teams.length){
         this.state.teams.map(t=>{
-          if(t.coachId == c._id){
+          console.log(t)
+          console.log(t.coachId)
+          if(t.coachId === c._id){
             console.log(`Match: Coach id ${c._id} and team coach id match ${t.coachId}`);
             teams.push(t.name)
           }
-          else{
-            console.log(`Fail: Coach id ${c._id} and team coach id not match ${t.coachId}`);
-            // continue;
-          }
+          return teams
+          // else{
+          //   console.log(`Fail: Coach id ${c._id} and team coach id not match ${t.coachId}`);
+          //   // continue;
+          // }
         })
-      }
-      // else{
-      //   this.getTeams();
       // }
-      console.log(teams)
       return<Coach
         key = {index}
         idx = {index}
