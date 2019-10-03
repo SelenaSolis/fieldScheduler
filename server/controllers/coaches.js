@@ -28,10 +28,7 @@ exports.create = function (req, res){
 }
 
 exports.update = function (req,res){
-    let teams = [];
-    teams.push(Team.findOne({coachId: req.body._id}))
-    console.log(teams)
-    req.body.teams = teams
+
     Coach.findByIdAndUpdate(req.body._id, req.body, (err, coach)=>{
         return res.json(coach);
     })

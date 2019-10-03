@@ -23,6 +23,9 @@ function TopNav(){
             <Link to='/fields'>
               <div className="dropdown-item">Fields</div>
             </Link>
+            <Link to='/scheduler'>
+              <div className="dropdown-item">Scheduler</div>
+            </Link>
           </div>
         </div>
       </nav>

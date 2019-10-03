@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import Fields from "./Fields"
+import Field from "./Field"
+require("dotenv").config();
+
 
 
 const mapStyles = {
@@ -47,9 +49,11 @@ export class MapContainer extends Component {
           </Map>
           </div>
           <div className = "col-6">
-            {this.state.fields.map((f)=>
-              <Fields
+            {this.state.fields.map((f, index)=>
+              <Field
+                key ={index}
                 field={f}
+                id = {index}
               />
             )}
           </div>
@@ -59,11 +63,15 @@ export class MapContainer extends Component {
       )
     }
     else{
-      return  "...loading"
+      return  (
+        <div>
+          Loading...
+        </div>
+      )
     }
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBsybA2i2zLi1_rzH4wN4TJIiZ3AmIW__Y'
+  apiKey: process.env.API_Key
 })(MapContainer);
