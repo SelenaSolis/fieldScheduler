@@ -7,7 +7,6 @@ import MapContainer from './components/GoogleMap'
 import Scheduler from "./components/Scheduler"
 import "./css/App.css";
 import Home from './components/Home'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 require("dotenv").config();
 
 
@@ -35,24 +34,24 @@ class App extends Component{
     .then(res => res.json())
     .then(data => {
       let fields = [];
-      data.map(f =>{
-        let string = '';
-        let field = Object.assign({}, f)
-        field.name.split(' ').map(word => string += `+${word}`)
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${string},+Austin,+TX&key=` + process.env.API_KEY)
-        .then(res => res.json())
-        .then(data => {
-          field.lat = data.results[0].geometry.location.lat;
-          field.lon = data.results[0].geometry.location.lng;
-        })
-        fields.push(field);
+      // data.map(f =>{
+        // let string = '';
+        // let field = Object.assign({}, f)
+        // field.name.split(' ').map(word => string += `+${word}`)
+        // fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${string},+Austin,+TX&key=` + process.env.API_KEY)
+        // .then(res => res.json())
+        // .then(data => {
+        //   field.lat = data.results[0].geometry.location.lat;
+        //   field.lon = data.results[0].geometry.location.lng;
+        // })
+        // fields.push(field);
         // fetch("/fields", {
         //   method: "PUT",
         //   headers: {"Content-Type": "application/json"},
         //   body: JSON.stringify(field)
         // }).then(console.log(field))
         
-      })
+      // })
       this.setState({fields: data})
     })
   }
