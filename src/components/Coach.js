@@ -3,7 +3,7 @@ import React from 'react';
 function Coach(props){
   console.log(props)
   return(
-    <div className="card container" id="card"style={{width: "18rem"}}>
+    <div className="card container mr-0 ml-0" id="card" style={{width: "18rem"}}>
       <div className="card-body text-center" >
         <h5 className="card-title">{props.fName} {props.lName}</h5>
         <h6 className="card-subtitle mb-2 text-muted"></h6>

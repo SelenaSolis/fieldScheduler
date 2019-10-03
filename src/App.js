@@ -7,7 +7,6 @@ import MapContainer from './components/GoogleMap'
 import Scheduler from "./components/Scheduler"
 import "./css/App.css";
 import Home from './components/Home'
-require("dotenv").config();
 
 
 /* global google */
@@ -33,7 +32,7 @@ class App extends Component{
     fetch('/fields')
     .then(res => res.json())
     .then(data => {
-      let fields = [];
+      // let fields = [];
       // data.map(f =>{
         // let string = '';
         // let field = Object.assign({}, f)
@@ -157,7 +156,7 @@ class App extends Component{
             <Route exact path='/coaches' component={ListCoaches}/>
             <Route path='/teams' render={props => <ListTeams {...props} coaches = {this.state.coaches}/>}/>
             <Route exact path='/fields' component={MapContainer}/>
-            <Route path='/scheduler' render={props =><Scheduler {...props} fields = {this.state.fields} teams = {this.state.teams} coaches = {this.state.coaches}/>}/>
+            {/* <Route path='/scheduler' render={props =><Scheduler {...props} fields = {this.state.fields} teams = {this.state.teams} coaches = {this.state.coaches}/>}/> */}
             </div>
           </div>
           

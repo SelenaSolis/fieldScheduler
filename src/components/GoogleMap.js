@@ -4,7 +4,6 @@ import Field from "./Field"
 require("dotenv").config();
 
 
-
 const mapStyles = {
   width: '400px',
   height: '400px',
@@ -12,12 +11,16 @@ const mapStyles = {
 
 
 export class MapContainer extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      fields:[]
-    }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     fields:[]
+  //   }
+  // }
+  state = {
+    fields:[]
   }
+
   componentDidMount(){
     fetch('/fields')
     .then(res => res.json())
@@ -73,5 +76,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.API_Key
+  apiKey:
 })(MapContainer);

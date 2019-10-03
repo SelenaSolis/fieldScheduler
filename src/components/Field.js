@@ -2,13 +2,18 @@ import React from 'react';
 
 function Field(props){
 
-  function findAvailableTms(dowObj){
+  function findTms(dowObj){
     let startAv = 0;
     let startBooked = 0
+    let coachId = "";
+    let teamId = ""
     let timeBlockAv = "";
+    let timeBlockBooked = "";
     let endAv = 0;
-    // let dayOfWkBooked = []
-    let dayOfWkAv = []
+    let endBooked = 0;
+    let dayOfWkBooked = [];
+    let bookedBlockObj = {}
+    let dayOfWkAv = [];
     let lastTm = Object.keys(dowObj)[Object.keys(dowObj).length-1]
     for (var time in dowObj) {
       if (Object.entries(dowObj).length === 0) {
@@ -22,7 +27,29 @@ function Field(props){
           endAv = time
         }
         else{
+          //increase available end time
           endAv = time
+        }
+        if(startBooked !== 0){
+          //end booked time block and push to booked array
+          let startBookedStr = String(startBooked-1200);
+          let endBookedStr = String(endBooked)
+          if(endBookedStr[2] === '4'){
+            endBookedStr = String(endBooked -1145)
+          }
+          else{
+            endBookedStr = String(endBooked - 1185)
+          }
+          timeBlockBooked = startBookedStr.slice(0,-2) + ":" + startBookedStr.slice(-2) + "-" + endBookedStr.slice(0,-2) + ":" + endBookedStr.slice(-2)
+          bookedBlockObj = {
+            timeBlockBooked: timeBlockBooked,
+            coachId: coachId,
+            teamId: teamId
+          }
+          
+          dayOfWkBooked.push(bookedBlockObj)
+
+          startBooked = 0;
         }
         if(time === lastTm){
             let startAvStr = String(startAv-1200);
@@ -39,12 +66,19 @@ function Field(props){
             startAv = 0;
         }
       }
-
-
       // isBooked
       else{
-        //end available time block
-        //store available time block
+        if(startBooked === 0){
+          //initializing time block booked
+          startBooked = time;
+          endBooked = time;
+          coachId = dowObj[time].coachId
+          teamId = dowObj[time].teamId
+        }
+        else{
+          //increasing end time to continue block
+          endBooked = time;
+        }
         if(startAv !== 0){
           let startAvStr = String(startAv-1200);
           let endAvStr = String(endAv)
@@ -61,38 +95,8 @@ function Field(props){
 
           //push to "available" array
           dayOfWkAv.push(timeBlockAv);
-
-        
-          // if(time == lastTm){
-          //   let startStr = String(start-1200);
-          //   let endStr = String(end)
-          //   if(endStr[2] === '4'){
-          //     endStr = String(end - 1145)
-          //   }
-          //   else{
-          //     endStr = String(end - 1185)
-          //   }
-            
-          //   timeBlock = startStr + "-" + endStr
-          //   dayOfWkFree.push(timeBlock);
-          //   start = 0;
-          // }
           startAv = 0;
-          // else{
-          //   let endStr = String(end);
-          //   if(endStr[2] === '4'){
-          //     endStr = String(end - 1145)
-          //   }
-          //   else{
-          //     endStr = String(end - 1185)
-          //   }
-          //   timeBlock = startStr + '-' + endStr
-          //   dayOfWkBooked.push(timeBlock);
-          //   start = 0;
-          // }
         }
-        //to create occupied array
-        //else if(start == 0)
       }
     }
     let mappedDowAv = dayOfWkAv.map((block, index) =>{
@@ -103,12 +107,11 @@ function Field(props){
         return " " + block + ","
       }
     })
-
-    return mappedDowAv
-  }
-  
-
-
+    let mappedDowBooked = dayOfWkBooked.map((blockObj, index)=>{
+        return <p> booked: {blockObj.timeBlockBooked} by {blockObj.coachId}-{blockObj.teamId}</p>
+    })
+    return [mappedDowAv, mappedDowBooked]
+  } 
 
   return(
       <div>
@@ -118,10 +121,14 @@ function Field(props){
           </button>
           <div className = "collapse" id = {`collapse${props.id}`}>
             <div className = "card card-body">
-              <p>Monday:{findAvailableTms(props.field.availTimesM)}</p>
-              <p>Tuesday:{findAvailableTms(props.field.availTimesT)}</p>
-              <p>Wednesday:{findAvailableTms(props.field.availTimesW)}</p>
-              <p>Thursday:{findAvailableTms(props.field.availTimesTh)}</p>
+              <p><b>Monday:{findTms(props.field.availTimesM)[0]}</b></p>
+              {findTms(props.field.availTimesM)[1]}
+              <p><b>Tuesday:{findTms(props.field.availTimesT)[0]}</b></p>
+              {findTms(props.field.availTimesT)[1]}
+              <p><b>Wednesday:{findTms(props.field.availTimesW)[0]}</b></p>
+              {findTms(props.field.availTimesW)[1]}
+              <p><b>Thursday:{findTms(props.field.availTimesTh)[0]}</b></p>
+              {findTms(props.field.availTimesTh)[1]}
             </div>
           </div>
       </div>
